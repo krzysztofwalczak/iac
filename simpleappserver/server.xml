@@ -24,7 +24,7 @@
     httpPort="-1"
     httpsPort="9443"/>
 
-<keystore id="defaultKeystore" location="key.p12" password="myPassword" type="PKCS12" />
+<keystore id="defaultKeystore" location="key.p12" type="PKCS12" />
 
 <applicationManager autoExpand="true"/>
 <variable name="defaultHostName" value="0.0.0.0" />
