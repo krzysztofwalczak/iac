@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="Web application server">
+
+<!-- Enable features -->
+<featureManager>
+    <feature>javaee-8.0</feature>
+    <feature>microProfile-3.0</feature>
+    <feature>localConnector-1.0</feature>
+    <feature>ssl-1.0</feature>
+    <feature>adminCenter-1.0</feature>
+    <feature>websocket-1.1</feature>
+</featureManager>
+
+<basicRegistry id="basic" realm="BasicRealm">
+   <user name="admin" password="adminpwd" />
+</basicRegistry>
+
+<administrator-role>
+  <user>admin</user>
+</administrator-role>
+
+<httpendpoint id="defaultHttpEndpoint"
+    host="*"
+    httpPort="9080"
+    httpsPort="9443"/>
+
+<keystore id="defaultKeystore" location="key.p12" password="myPassword" type="PKCS12" />
+
+<applicationManager autoExpand="true"/>
+<variable name="defaultHostName" value="0.0.0.0" />
+
+</server>
+
+
+
