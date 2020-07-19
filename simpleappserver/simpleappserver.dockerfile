@@ -1,5 +1,4 @@
 FROM websphere-liberty:kernel
-USER root
 USER 1001
 ADD ./server.xml //opt/ibm/wlp/usr/servers/defaultServer/server.xml
 ADD ./Sample1.war //opt/ibm/wlp/usr/servers/defaultServer/dropins
