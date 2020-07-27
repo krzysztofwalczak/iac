@@ -1,0 +1,22 @@
+version: '2.0'
+services:
+  appserver:
+    build: 
+      context: /opt/iac/appserver
+      dockerfile: wslib.dockerfile
+      args: 
+	        NAME: app01   
+    container_name: app01
+    hostname: app01
+    image: appserver  
+  httpserver:
+    build: 
+      context: /opt/iac/httpserver
+      dockerfile: http.dockerfile 
+    ports: 
+      - "80:80"
+    container_name: ihs01
+    hostname: ihs01
+    image: httpserver
+
+    

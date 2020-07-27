@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="Web application server">
+
+<!-- Enable features -->
+<featureManager>
+    <feature>microProfile-3.0</feature>
+    <feature>localConnector-1.0</feature>
+</featureManager>
+
+<basicRegistry id="basic" realm="BasicRealm">
+</basicRegistry>
+
+<httpendpoint id="defaultHttpEndpoint"
+    host="*"
+    httpPort="9080"
+    httpsPort="9443"/>
+
+<pluginConfiguration webserverPort="80"
+                     webserverSecurePort="443" />
+
+<applicationManager autoExpand="true"/>
+
+<variable name="defaultHostName" value="${env.HOSTNAME}" />
+
+</server>
+
+
+
