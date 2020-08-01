@@ -1,0 +1,35 @@
+version: '2.0'
+services:
+  appserver:
+    build: 
+      context: /opt/iac/appserver
+      dockerfile: wslib.dockerfile
+      args:
+           NAME: app01   
+    container_name: app01
+    hostname: app01
+    image: appserver  
+  clustered_appserver:
+    depends_on:
+     - appserver
+    build:
+      context: /opt/iac/clustered_appserver
+      dockerfile: wslib.dockerfile
+      args:
+           NAME: app02
+    container_name: app02
+    hostname: app02
+    image: clustered_appserver
+  load_balancer:
+    depends_on:
+     - clustered_appserver
+    build: 
+      context: /opt/iac/loadbalancer
+      dockerfile: http.dockerfile 
+    ports: 
+      - "80:80"
+    volumes:
+      - /opt/iac/loadbalancer/logs:/opt/IBM/HTTPServer/logs
+    container_name: ihs01
+    hostname: ihs01
+    image: load_balancer
