@@ -17,10 +17,6 @@ COPY ./git_clone.sh /home/default/scripts/
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts `
 && /home/default/scripts/git_clone.sh `
 && cd /opt/IBM/HTTPServer/conf/ `
-#&& git init  /opt/IBM/HTTPServer/conf/ `
-#&& git config --global user.name "git" `
-#&& git config --global user.email "krzysztof.walczak1@unilodz.eu" `
-#&& git clone ssh://git@github.com/krzysztofwalczak/plugincfg.git `
 && printf "\nLoadModule was_ap24_module \"/opt/IBM/WebSphere/Plugins/bin/64bits/mod_was_ap24_http.so" >> /opt/IBM/HTTPServer/conf/httpd.conf `
 && printf "\nWebSpherePluginConfig "/opt/IBM/HTTPServer/conf/plugincfg/mergedPlugin-cfg.xml"" >> /opt/IBM/HTTPServer/conf/httpd.conf `
 && /opt/IBM/HTTPServer/bin/apachectl restart 
