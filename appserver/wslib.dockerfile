@@ -14,10 +14,17 @@ ADD ./Sample1.war //opt/ibm/wlp/usr/servers/defaultServer/dropins
 COPY ./id_rsa /home/default/.ssh/id_rsa
 COPY ./known_hosts /home/default/.ssh/known_hosts
 COPY ./git.sh /home/default/scripts/git.sh
-RUN chmod +x /home/default/scripts/git.sh 
+RUN chown 1001:0 /home/default/.ssh/id_rsa \
+&& chown 1001:0 /home/default/.ssh/known_hosts \
+&& chown 1001:0 /home/default/scripts/git.sh \
+&& chmod 700 /home/default/.ssh/id_rsa \
+&& chmod 750 /home/default/scripts/git.sh \
+&& chmod 750 /home/default/.ssh/known_hosts \
+&& chown 1001:0 /home/default/.ssh \
+&& chmod 770 /home/default/.ssh
 USER 1001
 RUN /opt/ibm/wlp/bin/installUtility install defaultServer \
 && /opt/ibm/wlp/bin/server start defaultServer \
-&& sed -i "s/<Transport Hostname=".*" Port/<Transport Hostname=$NAME Port/g" /opt/ibm/wlp/output/defaultServer/logs/state/plugin-cfg.xml \
+&& sed -i "s/<Transport Hostname=".*" Port/<Transport Hostname=\x22${NAME}\x22 Port/g" /opt/ibm/wlp/output/defaultServer/logs/state/plugin-cfg.xml \
 && /home/default/scripts/git.sh  \
 && rm -f /home/default/.ssh/id_rsa

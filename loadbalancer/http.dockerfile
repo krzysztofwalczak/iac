@@ -14,9 +14,12 @@ RUN apt-get update  `
 COPY ./id_rsa /root/.ssh
 COPY ./known_hosts /root/.ssh
 COPY ./git_clone.sh /home/default/scripts/
-RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts `
+RUN chmod 755 /home/default/scripts/git_clone.sh `
+&& chmod 600 /root/.ssh/id_rsa `
+&& ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts `
 && /home/default/scripts/git_clone.sh `
 && cd /opt/IBM/HTTPServer/conf/ `
 && printf "\nLoadModule was_ap24_module \"/opt/IBM/WebSphere/Plugins/bin/64bits/mod_was_ap24_http.so" >> /opt/IBM/HTTPServer/conf/httpd.conf `
 && printf "\nWebSpherePluginConfig "/opt/IBM/HTTPServer/conf/plugincfg/mergedPlugin-cfg.xml"" >> /opt/IBM/HTTPServer/conf/httpd.conf `
-&& /opt/IBM/HTTPServer/bin/apachectl restart 
+&& rm -rf /root/.ssh/id_rsa `
+&& /opt/IBM/HTTPServer/bin/apachectl restart
