@@ -14,19 +14,15 @@ firewall { '001 accept http requests from anywhere':
   action => 'accept',
 }
 
-firewall { '002 accept ssh/sftp requests from currenet network':
+firewall { '002 accept ssh/sftp requests from current network':
   dport => 22,
   action => 'accept',
   source => '192.168.0.0/24'
 }
 
-firewall { '003 accept Puppet agents from current network':
+firewall { '003 accept Puppet agent requests from current network':
   dport => 8140,
+  proto => 'tcp',
   action => 'accept',
   source => '192.168.0.0/24'
 }
-
-firewall { '999 drop all other requests':
-  action => 'drop',
-}
-

@@ -7,7 +7,7 @@ class {'docker::compose':
   ensure => present,
 }
 
-docker_compose {'simple_environment':
-  compose_files => ['/opt/iac/environments/simple/docker-compose.yml'],
+docker_compose {'loadbalancer_environment':
+  compose_files => ['/opt/iac/environments/loadbalancer/docker-compose.yml'],
   ensure => present,
 }

@@ -5,7 +5,7 @@ services:
       context: /opt/iac/appserver
       dockerfile: wslib.dockerfile
       args: 
-	        NAME: app01   
+           NAME: app01   
     container_name: app01
     hostname: app01
     image: appserver  
